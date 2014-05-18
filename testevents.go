@@ -1,3 +1,29 @@
+// Package testevents is an example for this question on StackOverflow:
+// http://stackoverflow.com/questions/23699237/go-lang-test-events-listener/23706120#23706120
+//
+// It provides a simple wrapper of *testing.T and a basic event manager API to dispatch events on tests.
+// An example of its use would be, at the top of your testing file:
+//
+//    import "github.com/Jragonmiris/testevents"
+//    import "testing"
+//
+//    func init() {
+//        testevents.Register(MyListener)
+//    }
+//
+//    func TestXxx(tst *testing.T) {
+//        t := testevents.Start(tst, "TestXxx", false)
+//        defer t.Done()
+//
+//        err := DoSomething()
+//        if err != nil {
+//            t.Error(err)
+//        }
+//    }
+//
+// This package is engineered to be as close to the original testing framework as possible.
+// Note that the Parallel function is intentionally left unimplemented, as the package is not
+// concurrency safe.
 package testevents
 
 // EventListeners are functions that are called when the appropriate event
